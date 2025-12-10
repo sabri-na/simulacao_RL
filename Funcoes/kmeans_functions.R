@@ -19,9 +19,9 @@ traditional_kmeans <- function(data, K, max_iter = 100) {
       2 * (data %*% t(centroids))
     
     # Atribuicoes
-    assignments <- max.col(-distances)  # mais rapido que apply(which.min)
+    assignments <- max.col(-distances) 
     
-    # Atualizar centroides (usando rowsum para evitar loop)
+    # Atualizar centroides
     centroids <- rowsum(data, assignments) / as.vector(tabulate(assignments, nbins = K))
     
     # Verificar convergencia
@@ -34,4 +34,5 @@ traditional_kmeans <- function(data, K, max_iter = 100) {
     centroids = centroids,
     assignments = assignments
   )
+
 }
