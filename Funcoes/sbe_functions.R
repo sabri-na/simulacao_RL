@@ -4,17 +4,16 @@ calculate_gradient <- function(data, centroids, batch_indices) {
   n_batch <- nrow(batch_data)
   K <- nrow(centroids)
   
-  # Calculo da distancia quadrática otimizado para o mini-batch
+  # Calculo da distancia quadrática 
   distances <- 
     matrix(rowSums(batch_data^2), n_batch, K) +
     matrix(rowSums(centroids^2), n_batch, K, byrow = TRUE) -
     2 * (batch_data %*% t(centroids))
-  # ==========================================
   
   # Atribuições
   assignments <- max.col(-distances) 
   
-  # Calcular o gradiente (igual ao seu)
+  # Calcular o gradiente 
   gradient <- matrix(0, nrow = K, ncol = ncol(centroids))
   for (j in 1:K) {
     points_in_cluster <- batch_data[assignments == j, , drop = FALSE]
@@ -30,8 +29,6 @@ calculate_gradient <- function(data, centroids, batch_indices) {
 sbe_kmeans_centroids <- function(data, K, gamma0, M, alpha, beta, omaxit, imaxit) {
 
   data <- as.matrix(data)
-
-  # A inicialização garantirá que os centróides também sejam numéricos
   initial_indices <- sample(1:nrow(data), K)
   centroids <- data[initial_indices, , drop = FALSE] 
 
@@ -84,7 +81,7 @@ assign_points_and_objective <- function(data, centroids, weights = NULL) {
     weights <- rep(1, p)
   }
   
-  # Normaliza os pesos para somarem 1 (opcional, mas bom para estabilidade)
+  # Normaliza os pesos para somarem 1 (
   weights <- weights / sum(weights)
   
   # Matriz n x K com distâncias quadráticas ponderadas
@@ -118,3 +115,4 @@ sbe_kmeans <- function(data, K, gamma0, M, alpha, beta, omaxit, imaxit, weights 
     objective = assignments_obj$objective 
   ))
 }
+
