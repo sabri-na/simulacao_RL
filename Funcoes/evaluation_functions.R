@@ -86,12 +86,12 @@ classify_and_evaluate <- function(centroids, assignments, ds1, ds2, pairs) {
   # Adiciona o nome do modelo na chamada, se necessário 
   metrics_result <- evaluate_measures(pares_classificados, model_name = "ClusterModel") 
   
-  # 4. Retornar apenas as métricas (o que você estava usando)
+  # 4. Retornar apenas as métricas 
   return(list(
-    # Você não precisa retornar 'pares_classificados' se só for usar as métricas.
-    # Se precisar, mantenha: pares_classificados = pares_classificados,
+
     metrics = metrics_result # Agora é um data.frame de 1 linha.
   ))
 }
+
 
 
